@@ -1,0 +1,85 @@
+.coords {
+  /*color: #fff;*/
+  z-index: 2;
+  display: block;
+  position: absolute;
+  /*z-index: 2;*/
+  top: 96px;
+  left: 16px;
+  font-size: 10px;
+}
+.panel-collapse {
+  font-size: 12px;
+}
+.copyArticle {
+  z-index: 99;
+}
+.card-options:hover {
+  background: linear-gradient(rgba(0, 0, 0, .6) 0, rgba(0, 0, 0, .6) 100%, transparent 100%, rgba(255, 255, 255, 0) 100%);
+}
+#propertiesPanelContainer {
+  left: 15px;
+  top:15px;
+  right: auto;
+  opacity: .85;
+}
+#panelBasemaps {
+  right: 63px;
+  left: auto;
+}
+@media (max-width: 768px) {
+  #propertiesPanelContainer {
+    right: 47px;
+    left: 0;
+    max-width: 100%;
+  }
+}
+#showElevation {
+  position: absolute;
+  top: 130px;
+  right: 15px;
+  padding: 12px;
+}
+#zoomInBookmark {
+  position: absolute;
+  top: 180px;
+  right: 15px;
+  padding: 12px;
+}
+#zoomOutBookmark {
+  position: absolute;
+  top: 213px;
+  right: 15px;
+  padding: 12px;
+}
+#showcode {
+  position: absolute;
+  top: 260px;
+  right: 15px;
+  padding: 12px;
+}
+.panel-body {
+  max-height: 800px !important;
+}
+input {
+  text-align: center;
+}
+#centerParamsCopy, #cameraParamsCopy {
+  color: #196fa6;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+}
+#cameraParamsCopy {
+  top: 0px;
+}
+#centerLabel, #cameraLabel {
+  top:15px;
+  position: absolute;
+  min-width: 0;
+  font-size:14px;
+  color:#000000;
+}
+.highlight-ui {
+  background-color: rgba(255,255,255,0.5);
+}
