@@ -1,4 +1,4 @@
-#ArcGIS API for JavaScript Super-Duper Extent Helper 4
+#Starting Fresh with JavaScript 4.x Demo Theater samples
 
 [Live Sample](http://bsnider.github.io/UC-Demos/CameraDemo/index.html)
 
