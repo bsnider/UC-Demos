@@ -1,8 +1,8 @@
-#Starting Fresh with JavaScript 4.x Demo Theater samples
+#Starting Fresh with JavaScript 4.x - Camera Demo
 
 [Live Sample](http://bsnider.github.io/UC-Demos/CameraDemo)
 
-These demos will be used in the Starting Fresh with JavaScript 4.x Demo Theater at the 2016 UC.
+This demo will be used in the Starting Fresh with JavaScript 4.x Demo Theater at the 2016 UC.  It demonstrates the functionality of the 3D camera.
 
 ## Features
 

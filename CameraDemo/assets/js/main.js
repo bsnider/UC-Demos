@@ -111,8 +111,9 @@ require(["esri/Map",
     });
 
     /*********************
-     * Add graphics layer
+     * Add graphics layer for extent polygon
      *********************/
+
     graphicsLayerGround = new GraphicsLayer({
       elevationInfo: {
         mode: "on-the-ground"
@@ -122,8 +123,9 @@ require(["esri/Map",
     mapScene.add(graphicsLayerGround);
 
     /*********************
-     * Add graphics layers
+     * Add graphics layer for non-draped features
      *********************/
+
     graphicsLayer = new GraphicsLayer({
       elevationInfo: {
         mode: "relative-to-ground"
@@ -133,7 +135,7 @@ require(["esri/Map",
     mapScene.add(graphicsLayer);
 
     /***************************
-     * Add a 3D polygon graphic
+     * Add a 3D polygon graphic for the extent
      ***************************/
 
     var polygon = new Polygon([
@@ -158,38 +160,7 @@ require(["esri/Map",
     graphicsLayerGround.add(polygonGraphic);
 
     /*************************
-     * Add 3D camera sphere
-     *************************/
-    var camSphereSymbol = new PointSymbol3D({
-      symbolLayers: [new ObjectSymbol3DLayer({
-        resource: {
-          primitive: "sphere" // cube, cone, diamond, tetrahedron, cylinder
-        },
-        material: {
-          color: [0, 169, 230] // blue
-        },
-        height: 80000,
-        width: 80000
-      })]
-    });
-    var camSpherePoint = new Point({
-      x: -84.18151858651342,
-      y: 43.680183989775934,
-      z: 1342601.574273864
-    });
-    var camSpherePoint = new Point({
-      x: -7.76721165393066,
-      y: 33.0048663865762,
-      z: 1342601.574273864
-    });
-    var camSphereGraphic = new Graphic({
-      geometry: camSpherePoint,
-      symbol: camSphereSymbol
-    });
-    //graphicsLayer.add(camSphereGraphic);
-
-    /*************************
-     * Add 3D camera lens
+     * Add center point symbol
      *************************/
     var centerSymbol = new PointSymbol3D({
       symbolLayers: [new ObjectSymbol3DLayer({
@@ -197,7 +168,7 @@ require(["esri/Map",
           primitive: "sphere" // cube, cone, diamond, tetrahedron, cylinder
         },
         material: {
-          color: "#78e534"
+          color: [120,229,52,.5]
         },
         height: 40000,
         width: 40000
@@ -215,23 +186,27 @@ require(["esri/Map",
     graphicsLayer.add(centerGraphic);
 
     /****************************
-     * Add camera height polyline graphic
+     * Add camera ground xy point graphic
      ****************************/
-    var camHeightLine = new Polyline([
-      [-79.27943956844277, 36.472007963105845, 0],
-      [-79.27943956844277, 36.472007963105845, 1293757.1773598082]
-    ]);
-    var camHeightSymbol = new LineSymbol3D({
-      symbolLayers: [new PathSymbol3DLayer({
-        size: 10000, // 20 meters in diameter
-        material: {
-          color: "#ff7380"
-        }
-      })]
-    });
-    var camHeightGraphic = new Graphic({
-      geometry: camHeightLine,
-      symbol: camHeightSymbol
+
+     var camXYSymbol = new PointSymbol3D({
+       symbolLayers: [new ObjectSymbol3DLayer({
+         resource: {
+           primitive: "sphere" // cube, cone, diamond, tetrahedron, cylinder
+         },
+         material: {
+           color: [0, 169, 230, .6] // blue
+         },
+         height: 1000000,
+         width: 20000
+       })]
+     });
+    var camXYPoint = new Point(
+      [-79.27943956844277, 36.472007963105845, 0]
+    );
+    var camXYGraphic = new Graphic({
+      geometry: camXYPoint,
+      symbol: camXYSymbol
     });
     //graphicsLayer.add(camHeightGraphic);
     //graphicsLayer.add(camFocusGraphic);
@@ -239,6 +214,7 @@ require(["esri/Map",
     /****************************
      * Add camera focus polyline graphic
      ****************************/
+
     var camFocusLine = new Polyline([
       [-84.18151858651342, 43.680183989775934, 0],
       [-79.27943956844277, 36.472007963105845, 1293757.1773598082]
@@ -247,7 +223,7 @@ require(["esri/Map",
       symbolLayers: [new PathSymbol3DLayer({
         size: 5000, // 20 meters in diameter
         material: {
-          color: "#78e534"
+          color: [120,229,52,.8]
         }
       })]
     });
@@ -260,16 +236,11 @@ require(["esri/Map",
     /****************************
      * Add camera lens polyline graphic
      ****************************/
-    var camLensLine = new Polyline([
+    var lensLine = new Polyline([
       [-79.27943956844277, 36.472007963105845, 1293757.1773598082],
       [-79.15943956844277, 36.272007963105845, 1336757.1773598082]
     ]);
-    var camLensLine2 = new Polyline([
-      [-79.15943956844277, 36.272007963105845, 1336757.1773598082],
-      [-78.67943956844277, 35.472007963105845, 1513757.1773598082]
-    ]);
-
-    var camLensSymbol = new LineSymbol3D({
+    var lensSymbol = new LineSymbol3D({
       symbolLayers: [new PathSymbol3DLayer({
         size: 20000, // 20 meters in diameter
         material: {
@@ -277,7 +248,16 @@ require(["esri/Map",
         }
       })]
     });
-    var camLensSymbol2 = new LineSymbol3D({
+    var lensGraphic = new Graphic({
+      geometry: lensLine,
+      symbol: lensSymbol
+    });
+
+    var camLine = new Polyline([
+      [-79.15943956844277, 36.272007963105845, 1336757.1773598082],
+      [-78.67943956844277, 35.472007963105845, 1513757.1773598082]
+    ]);
+    var camSymbol = new LineSymbol3D({
       symbolLayers: [new PathSymbol3DLayer({
         size: 50000, // 20 meters in diameter
         material: {
@@ -285,14 +265,9 @@ require(["esri/Map",
         }
       })]
     });
-
-    var camLensGraphic = new Graphic({
-      geometry: camLensLine,
-      symbol: camLensSymbol
-    });
-    var camLensGraphic2 = new Graphic({
-      geometry: camLensLine2,
-      symbol: camLensSymbol2
+    var camGraphic = new Graphic({
+      geometry: camLine,
+      symbol: camSymbol
     });
     //graphicsLayer.add(camLensGraphic);
     //graphicsLayer.add(camLensGraphic2);
@@ -329,10 +304,10 @@ require(["esri/Map",
           tilt: 36.290548090191386
         });
 
-        graphicsLayer.add(camHeightGraphic);
+        graphicsLayer.add(camXYGraphic);
         graphicsLayer.add(camFocusGraphic);
-        graphicsLayer.add(camLensGraphic);
-        graphicsLayer.add(camLensGraphic2);
+        graphicsLayer.add(lensGraphic);
+        graphicsLayer.add(camGraphic);
       });
 
       $("#zoomInBookmark").click(function() {
@@ -356,10 +331,10 @@ require(["esri/Map",
           app.sceneView.camera = cam;
         });
 
-        graphicsLayer.remove(camHeightGraphic);
+        graphicsLayer.remove(camXYGraphic);
         graphicsLayer.remove(camFocusGraphic);
-        graphicsLayer.remove(camLensGraphic);
-        graphicsLayer.remove(camLensGraphic2);
+        graphicsLayer.remove(lensGraphic);
+        graphicsLayer.remove(camGraphic);
       });
 
       function updateElevation(ev) {
