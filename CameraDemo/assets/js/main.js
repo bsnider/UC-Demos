@@ -23,10 +23,13 @@ require(["esri/Map",
   "esri/symbols/PathSymbol3DLayer",
   "esri/symbols/LineSymbol3D",
 
+  "esri/widgets/Zoom",
+  "esri/widgets/Compass",
+
   "dojo/domReady!"
 ], function(Map, Basemap, MapView, SceneView, FeatureLayer, Search, watchUtils, query,
   GraphicsLayer, Graphic, Point, Polyline, Polygon,
-  SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, ObjectSymbol3DLayer, PointSymbol3D, PathSymbol3DLayer, LineSymbol3D) {
+  SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, ObjectSymbol3DLayer, PointSymbol3D, PathSymbol3DLayer, LineSymbol3D, Zoom, Compass) {
   $(document).ready(function() {
     app = {
       //scale: 500000,
@@ -65,7 +68,7 @@ require(["esri/Map",
       center: app.center,
       padding: app.viewPadding,
       ui: {
-        components: ["zoom", "compass", "attribution"],
+        components: ["attribution"],
         padding: app.uiPadding,
         position: "top-right"
       }
@@ -84,7 +87,7 @@ require(["esri/Map",
       padding: app.viewPadding,
       camera: app.camera,
       ui: {
-        components: ["zoom", "compass", "attribution", "home"],
+        components: ["attribution"],
         padding: app.uiPadding,
         position: "top-right"
       },
@@ -92,6 +95,14 @@ require(["esri/Map",
     });
 
     app.activeView = app.sceneView;
+
+    app.activeView.ui.add(new Zoom({
+      view: app.activeView
+    }), "top-right");
+
+    app.activeView.ui.add(new Compass({
+      view: app.activeView
+    }), "top-right");
 
     // var featureLayer = new FeatureLayer({
     //   url: "http://services.arcgis.com/Wl7Y1m92PbjtJs5n/arcgis/rest/services/airplane_poly/FeatureServer/0" //,
@@ -335,6 +346,32 @@ require(["esri/Map",
         graphicsLayer.remove(camFocusGraphic);
         graphicsLayer.remove(lensGraphic);
         graphicsLayer.remove(camGraphic);
+      });
+
+      $("#tiltBookmark").click(function() {
+        console.log("click");
+        app.sceneView.goTo({
+          position: { // autocasts as new Point()
+            longitude: -25.321,
+            latitude: 42.388,
+            z: 3619767.961
+          },
+          heading: 283.032,
+          tilt: 39.220
+        });
+      });
+
+      $("#headingBookmark").click(function() {
+        console.log("click");
+        app.sceneView.goTo({
+          position: { // autocasts as new Point()
+            longitude: -79.230,
+            latitude: 36.493,
+            z: 6879873.224
+          },
+          heading: 0,
+          tilt: 3.063
+        });
       });
 
       function updateElevation(ev) {

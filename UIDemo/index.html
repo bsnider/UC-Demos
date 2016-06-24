@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Theming widgets</title>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.0/esri/css/main.css">
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }
+  </style>
+
+  <script src="https://js.arcgis.com/4.0/"></script>
+  <script>
+    var map, view;
+
+    require([
+      "esri/Map",
+      "esri/views/SceneView",
+      "esri/widgets/Search",
+              "esri/widgets/BasemapToggle",
+      "dojo/domReady!"
+    ], function(Map, SceneView, Search, BasemapToggle) {
+
+      map = new Map({
+        basemap: "streets"
+      });
+
+      view = new SceneView({
+        map: map,
+        container: "viewDiv",
+        camera: { // autocasts as new Camera()
+          position: { // autocasts as new Point()
+            longitude: -79.201,
+            latitude: 36.245,
+            z: 1344220.082
+          },
+          heading: 334.021,
+          tilt: 33.321
+        },
+        ui: {
+          //components: [],
+          //components: ["zoom", "attribution"],
+          padding: 20
+        }
+      });
+
+      view.ui.add(new Search({
+        view: view
+      }), "top-right");
+
+      view.ui.add(new BasemapToggle({
+        view: view
+      }), "bottom-left");
+
+    });
+  </script>
+</head>
+
+<!-- remove this class name to see the default style -->
+<body class="dark-theme">
+  <div id="viewDiv"></div>
+</body>
+</html>

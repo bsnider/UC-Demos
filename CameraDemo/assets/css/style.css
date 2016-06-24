@@ -52,9 +52,21 @@
   right: 15px;
   padding: 12px;
 }
+#tiltBookmark {
+  position: absolute;
+  top: 246px;
+  right: 15px;
+  padding: 12px;
+}
+#headingBookmark {
+  position: absolute;
+  top: 279px;
+  right: 15px;
+  padding: 12px;
+}
 #showcode {
   position: absolute;
-  top: 260px;
+  top: 326px;
   right: 15px;
   padding: 12px;
 }
