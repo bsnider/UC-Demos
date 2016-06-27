@@ -208,7 +208,7 @@ require(["esri/Map",
          material: {
            color: [0, 169, 230, .6] // blue
          },
-         height: 1000000,
+         height: 2587514.354719616,
          width: 20000
        })]
      });
@@ -285,13 +285,17 @@ require(["esri/Map",
 
     // EXECUTE AFTER MAP INIT //////////////////////////////////////////////////////////////////////////
     app.activeView.then(function() {
+
+      $("#showElevation").css("visibility", "visible");
+      $("#headingBookmark").css("visibility", "visible");
+      $("#zoomOutBookmark").css("visibility", "visible");
+      $("#zoomInBookmark").css("visibility", "visible");
+      $("#tiltBookmark").css("visibility", "visible");
+
+
       graphicsLayer.popupEnabled = false;
       app.sceneView.popup.visible = false;
-      app.activeView.ui.move("zoom", "top-right");
-      app.activeView.ui.move("compass", "top-right");
 
-      searchWidgetNav = createSearchWidget("searchNavDiv");
-      searchWidgetPanel = createSearchWidget("searchPanelDiv");
       show3DParams();
       app.sceneView.watch('camera', function() {
         //displays the map center and camera values
