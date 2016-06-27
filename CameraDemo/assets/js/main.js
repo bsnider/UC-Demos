@@ -291,7 +291,7 @@ require(["esri/Map",
       $("#zoomOutBookmark").css("visibility", "visible");
       $("#zoomInBookmark").css("visibility", "visible");
       $("#tiltBookmark").css("visibility", "visible");
-
+      $("#showcode").css("visibility", "visible");
 
       graphicsLayer.popupEnabled = false;
       app.sceneView.popup.visible = false;
